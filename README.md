@@ -3,28 +3,29 @@
 [![Join the #publiccode channel](https://img.shields.io/badge/Slack%20channel-%23publiccode-blue.svg?logo=slack)](https://developersitalia.slack.com/messages/CAM3F785T)
 [![Get invited](https://slack.developers.italia.it/badge.svg)](https://slack.developers.italia.it/)
 
-This is a template repository for [creating a GitHub JavaScript action](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action).
-
-Click `Use this template` button to create your action based on this template.
-
-A sample action to get GitHub star counts and license from a given repository.
+A simple GitHub action to post a Slack message when a new version is released.
 
 ## Inputs
 
 The following inputs briefly explained here are fully declared and documented in the [action.yaml](action.yaml):
 
-* `repo` [**Required**] - GitHub repository to fetch (default `${{ github.repository }}`)
+* `slack_token` [**Required**] - Slack token
 
-* `github_token` [**Optional**] - GitHub token to interact with GitHub API (default `${{ github.token }}`)
+* `channel_id` [**Required**] - Channel ID where to post
+
+* `project_name` [**Required**] - Project name to display
+
+* `repo_name` [**Required**] - Repo name (e.g. 'italia/design-comuni-wordpress-theme')
 
 ## Examples
 
-Include this action in your repo by creating 
-`.github/workflows/js-action-template.yml`and edit where needed:
+Run this action on new tag push or new release!
 
 ```yml
-on: [push, pull_request]
-
+on:
+  push:
+    tags:
+      - 'v2*'
 jobs:
   examplejob:
     runs-on: ubuntu-latest
@@ -33,7 +34,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: italia/js-action-template@v1
       with:
-        repo: "italia/publiccode-parser-action"
+        repo: "italia/slack-notify-release-action"
 ```
 
 ## Build the action
@@ -63,7 +64,7 @@ This software is maintained by the
 
 ## License
 
-© 2021 Dipartimento per la Trasformazione Digitale - Presidenza del Consiglio dei
+© 2023 Dipartimento per la Trasformazione Digitale - Presidenza del Consiglio dei
 Ministri
 
 Licensed under the EUPL.

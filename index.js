@@ -1,39 +1,67 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
-const https = require("https")
+const core = require('@actions/core')
+const github = require('@actions/github')
+const https = require('https')
+const simpleGit = require('simple-git');
 
-const githubToken = core.getInput('github_token');
-const repo = core.getInput('repo');
+const main = async () => {
+  const currentRepoGit = simpleGit();
+  const tags = (await currentRepoGit.tags()).all
 
-const requestOptions = {
-  hostname: 'api.github.com',
-  path: `/repos/${repo}`,
-  headers: { 
-    'User-Agent': 'Mozilla/5.0',
+  const version = tags.pop()
+  const repoName = core.getInput('repo_name')
+  const changelogUrl = `https://github.com/${repoName}/releases/tag/${version}`
+  
+  const slackToken = core.getInput('slack_token')
+  const channelId = core.getInput('channel_id')
+  const projectName = core.getInput('project_name')
+  
+  const payload = JSON.stringify({
+    channel: channelId,
+    token: slackToken,
+    attachments: [
+      {
+        pretext : `Rilasciata la nuova versione di ${projectName}: ${version}!`,
+        text : `Changelog disponibile qua: ${changelogUrl}`,
+      },
+    ],
+  })
+  
+  const requestOptions = {
+    method: 'POST',
+    port: 443,
+    hostname: 'slack.com',
+    path: '/api/chat.postMessage',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': payload.length,
+      Authorization: `Bearer ${slackToken}`,
+      Accept: 'application/json',
+    },
   }
-};
-if (githubToken) {
-  console.log("Use GITHUB_TOKEN to get release data.");
-  requestOptions.headers['Authorization'] = `token: ${githubToken}`
-} else {
-  console.log("GITHUB_TOKEN is not available. Subsequent GitHub API call may fail due to API limit.");
+
+  const messageRequest = https.request(requestOptions, res => {
+    let responseData = ''
+    res.on('data', (d) => {
+      responseData += d
+    })
+    res.on('end', () => {
+      if (res.statusCode === 200) {
+        const jsonResponse = JSON.parse(responseData)
+        if (jsonResponse.ok === true) {
+          core.setOutput('status', '✅ Message sent!')
+          return
+        }
+      }
+      core.setFailed(`❌ Failed request: ${responseData}`)
+    })
+  })
+
+  messageRequest.on('error', () => {
+    core.setFailed('Failed to fetch Slack')
+  })
+
+  messageRequest.write(payload)
+  messageRequest.end()
 }
 
-const repoRequest = https.request(requestOptions, res => {
-  let responseData = '';
-  res.on('data', (d) => {
-    responseData += d;
-  })
-  res.on('end', () => {
-    const response = JSON.parse(responseData);
-    const stars = response.stargazers_count;
-    const license = response.license.name;
-    console.log(`Repo has ${stars} ⭐️ and is released under ${license} license`)
-    core.setOutput("stars", stars);
-    core.setOutput("license", license);
-  })
-})
-repoRequest.on("error", () => {
-  core.setFailed("Failed to fetch GitHub");
-})
-repoRequest.end()
+main()
