@@ -31,13 +31,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Get Stars and License
     steps:
-    - uses: actions/checkout@v2
-    - uses: italia/slack-notify-release-action@v0.0.1
-      with:
-        slack_token: ${{ secrets.SLACK_TOKEN }}
-        channel_id: ${{ secrets.SLACK_CHANNEL }}
-        project_name: Tema Wordpress - Design Scuole
-        repo_name: italia/design-scuole-wordpress-theme
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: main
+      - name: Notify new release on Slack
+        uses: italia/slack-notify-release-action
+        with:
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          channel_id: ${{ secrets.SLACK_CHANNEL }}
+          project_name: Slack notification action
+          repo_name: italia/slack-notify-release-action
 ```
 
 ## Build the action
