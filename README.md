@@ -23,7 +23,7 @@ Run this action on new tag push or new release!
 on:
   push:
     tags:
-      - 'v2*'
+      - 'v1*'
 jobs:
   examplejob:
     runs-on: ubuntu-latest
@@ -39,6 +39,10 @@ jobs:
           channel_id: C03AA0A0A3A
           project_name: Slack notification action
 ```
+
+Result:
+
+<img width="555" alt="image" src="https://user-images.githubusercontent.com/537363/218570780-bb78a8aa-d2dc-43f9-9c3a-161160b9f073.png">
 
 ## Build the action
 
