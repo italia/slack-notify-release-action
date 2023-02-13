@@ -15635,7 +15635,7 @@ const main = async () => {
   const tags = (await currentRepoGit.tags()).all
 
   const version = tags.pop()
-  const repoName = core.getInput('repo_name')
+  const repoName = github.context.payload.repository.full_name
   const changelogUrl = `https://github.com/${repoName}/releases/tag/${version}`
   
   const slackToken = core.getInput('slack_token')

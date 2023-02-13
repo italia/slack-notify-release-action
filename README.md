@@ -15,8 +15,6 @@ The following inputs briefly explained here are fully declared and documented in
 
 * `project_name` [**Required**] - Project name to display
 
-* `repo_name` [**Required**] - Repo name (e.g. 'italia/design-comuni-wordpress-theme')
-
 ## Examples
 
 Run this action on new tag push or new release!
@@ -41,7 +39,6 @@ jobs:
           slack_token: ${{ secrets.SLACK_TOKEN }}
           channel_id: ${{ secrets.SLACK_CHANNEL }}
           project_name: Slack notification action
-          repo_name: italia/slack-notify-release-action
 ```
 
 ## Build the action

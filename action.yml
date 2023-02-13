@@ -12,9 +12,6 @@ inputs:
   project_name:
     description: 'Project name to display'
     required: true
-  repo_name:
-    description: 'Repo name (e.g. "italia/design-comuni-wordpress-theme")'
-    required: true
 
 outputs:
   status:
