@@ -15659,7 +15659,7 @@ const main = async () => {
     hostname: 'slack.com',
     path: '/api/chat.postMessage',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
       'Content-Length': payload.length,
       Authorization: `Bearer ${slackToken}`,
       Accept: 'application/json',
