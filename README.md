@@ -32,9 +32,12 @@ jobs:
     name: Get Stars and License
     steps:
     - uses: actions/checkout@v2
-    - uses: italia/js-action-template@v1
+    - uses: italia/slack-notify-release-action@v0.0.1
       with:
-        repo: "italia/slack-notify-release-action"
+        slack_token: ${{ secrets.SLACK_TOKEN }}
+        channel_id: ${{ secrets.SLACK_CHANNEL }}
+        project_name: Tema Wordpress - Design Scuole
+        repo_name: italia/design-scuole-wordpress-theme
 ```
 
 ## Build the action
