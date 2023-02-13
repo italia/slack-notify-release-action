@@ -1,4 +1,4 @@
-name: 'Slack notify release action'
+name: 'slack-notify-release-action'
 description: 'A simple GitHub action to post a Slack message when a new version is released.'
 author: 'italia'
 
