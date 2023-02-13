@@ -11,7 +11,7 @@ The following inputs briefly explained here are fully declared and documented in
 
 * `slack_token` [**Required**] - Slack token
 
-* `channel_id` [**Required**] - Channel ID where to post
+* `channel_id` [**Required**] - Channel ID where to post (shown in 'channel details', e.g. 'C03AA0A0A3A')
 
 * `project_name` [**Required**] - Project name to display
 
@@ -36,7 +36,7 @@ jobs:
         uses: italia/slack-notify-release-action
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}
-          channel_id: ${{ secrets.SLACK_CHANNEL }}
+          channel_id: C03AA0A0A3A
           project_name: Slack notification action
 ```
 
