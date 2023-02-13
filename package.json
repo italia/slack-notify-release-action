@@ -1,21 +1,21 @@
 {
-  "name": "js-action-template",
+  "name": "slack-notify-release-action",
   "version": "0.0.1",
   "description": "A simple GitHub action to post a Slack message when a new version is released.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "ncc build index.js --license licenses.txt"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/italia/js-action-template.git"
+    "url": "git+https://github.com/italia/slack-notify-release-action.git"
   },
   "author": "Italia",
   "license": "EUPL-1.2",
   "bugs": {
-    "url": "https://github.com/italia/js-action-template/issues"
+    "url": "https://github.com/italia/slack-notify-release-action/issues"
   },
-  "homepage": "https://github.com/italia/js-action-template#readme",
+  "homepage": "https://github.com/italia/slack-notify-release-action#readme",
   "dependencies": {
     "@actions/core": "^1.9.1",
     "@actions/github": "^4.0.0",

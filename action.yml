@@ -1,20 +1,24 @@
-name: 'Action name'
-description: 'Action description'
+name: 'Slack notify release action'
+description: 'A simple GitHub action to post a Slack message when a new version is released.'
 author: 'italia'
 
 inputs:
-  github_token:
-    description: 'GITHUB_TOKEN'
-    default: '${{ github.token }}'
-    required: false
-  repo:
-    description: 'GitHub repository. e.g. italia/publiccode-parser-action'
-    default: '${{ github.repository }}'
+  slack_token:
+    description: 'Slack token'
+    required: true
+  channel_id:
+    description: 'Channel ID'
+    required: true
+  project_name:
+    description: 'Project name to display'
+    required: true
+  repo_name:
+    description: 'Repo name (e.g. "italia/design-comuni-wordpress-theme")'
     required: true
 
 outputs:
-  stars:
-    description: 'The stars of the repository'
+  status:
+    description: 'The status of message sent'
   license:
     description: 'The license used in the repository'
 
