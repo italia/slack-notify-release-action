@@ -27,7 +27,6 @@ on:
 jobs:
   examplejob:
     runs-on: ubuntu-latest
-    name: Get Stars and License
     steps:
       - uses: actions/checkout@v3
         with:
