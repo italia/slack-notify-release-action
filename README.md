@@ -1,6 +1,5 @@
 # Slack notify release GitHub action
 
-[![Join the #publiccode channel](https://img.shields.io/badge/Slack%20channel-%23publiccode-blue.svg?logo=slack)](https://developersitalia.slack.com/messages/CAM3F785T)
 [![Get invited](https://slack.developers.italia.it/badge.svg)](https://slack.developers.italia.it/)
 
 A simple GitHub action to post a Slack message when a new version is released.
