@@ -5,7 +5,7 @@ const simpleGit = require('simple-git');
 
 const main = async () => {
   const currentRepoGit = simpleGit();
-  const tags = (await currentRepoGit.tags()).all
+  const tags = (await currentRepoGit.tags({'--sort' : 'creatordate'})).all
 
   const version = tags.pop()
   const repoName = github.context.payload.repository.full_name
