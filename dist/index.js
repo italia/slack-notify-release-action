@@ -15148,7 +15148,7 @@ const simpleGit = __nccwpck_require__(9103);
 
 const main = async () => {
   const currentRepoGit = simpleGit();
-  const tags = (await currentRepoGit.tags()).all
+  const tags = (await currentRepoGit.tags({'--sort' : 'taggerdate'})).all
 
   const version = tags.pop()
   const repoName = github.context.payload.repository.full_name
@@ -15208,6 +15208,7 @@ const main = async () => {
 }
 
 main()
+
 })();
 
 module.exports = __webpack_exports__;
