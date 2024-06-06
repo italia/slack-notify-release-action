@@ -4,6 +4,12 @@
 
 A simple GitHub action to post a Slack message when a new version is released.
 
+## Get a Bot token
+
+Go in [Slack API portal](https://api.slack.com/) and get the bot token to run this app.
+
+<img width="954" alt="image" src="https://github.com/italia/slack-notify-release-action/assets/537363/0bca7829-24ff-47f6-b45d-6a92911ee753">
+
 ## Inputs
 
 The following inputs briefly explained here are fully declared and documented in the [action.yaml](action.yaml):
