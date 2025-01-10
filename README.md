@@ -20,6 +20,10 @@ The following inputs briefly explained here are fully declared and documented in
 
 * `project_name` [**Required**] - Project name to display
 
+* `release_template` - Release template (default: `New release available! {{projectName}}: {{version}}`)
+
+* `changelog_template` - Changelog template (default: `Changelog: {{changelog}}`)
+
 ## Examples
 
 Run this action on new tag push or new release!

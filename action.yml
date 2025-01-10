@@ -12,12 +12,16 @@ inputs:
   project_name:
     description: 'Project name to display'
     required: true
+  release_template:
+    description: Release template
+    default: 'New release available for {{projectName}}: {{version}} 🎉'
+  changelog_template:
+    description: Changelog template
+    default: 'Changelog: {{changelogUrl}}'
 
 outputs:
   status:
     description: 'The status of message sent'
-  license:
-    description: 'The license used in the repository'
 
 runs:
   using: 'node20'
