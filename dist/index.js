@@ -15146,6 +15146,14 @@ const github = __nccwpck_require__(5438)
 const https = __nccwpck_require__(5687)
 const simpleGit = __nccwpck_require__(9103);
 
+const renderTemplate = (template, args={}) => {
+  let finalRender = template;
+  for (const [key, value] of Object.entries(args)) {
+    finalRender = finalRender.replace(`{{${key}}}`, value);
+  }
+  return finalRender;
+}
+
 const main = async () => {
   const currentRepoGit = simpleGit();
   const tags = (await currentRepoGit.tags({'--sort' : 'taggerdate'})).all
@@ -15157,18 +15165,24 @@ const main = async () => {
   const slackToken = core.getInput('slack_token')
   const channelId = core.getInput('channel_id')
   const projectName = core.getInput('project_name')
+  const releaseTemplate = core.getInput('release_template')
+  const changelogTemplate = core.getInput('changelog_template')
   
   const payload = JSON.stringify({
     channel: channelId,
     token: slackToken,
     attachments: [
       {
-        pretext : `Rilasciata la nuova versione di ${projectName}: ${version}!`,
-        text : `Changelog disponibile qua: ${changelogUrl}`,
+        pretext : renderTemplate(releaseTemplate, {
+          projectName: projectName,
+          version: version
+        }), // `Nuova versione disponibile! ${projectName}: ${version}!`,
+        text : renderTemplate(changelogTemplate, {
+          changelogUrl: changelogUrl
+        }),
       },
     ],
   })
-  
   const requestOptions = {
     method: 'POST',
     port: 443,
