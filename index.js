@@ -5,7 +5,7 @@ const simpleGit = require('simple-git');
 
 const renderTemplate = (template, args={}) => {
   let finalRender = template;
-  for (const [key, value] of myMap.entries()) {
+  for (const [key, value] of Object.entries(args)) {
     finalRender = finalRender.replace(`{{${key}}}`, value);
   }
   return finalRender;
@@ -40,7 +40,6 @@ const main = async () => {
       },
     ],
   })
-  
   const requestOptions = {
     method: 'POST',
     port: 443,
